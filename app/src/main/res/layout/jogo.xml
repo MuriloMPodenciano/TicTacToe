@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <androidx.appcompat.widget.Toolbar android:id="@+id/mainTb"
         android:layout_width="match_parent"
@@ -17,10 +17,18 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <TextView android:id="@+id/jogadorTv"
+    <TextView android:id="@+id/idjogoTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mainTb"
+        android:text="ID"
+        android:textAlignment="center"
+        android:textSize="25sp"/>
+
+    <TextView android:id="@+id/jogadorTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/idjogoTv"
         android:text="JOGADOR 1/2"
         android:textAlignment="center"
         android:textSize="50sp"/>
