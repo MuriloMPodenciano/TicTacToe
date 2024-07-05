@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.activities
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tictactoe.Constant.EXTRA_JOGO
+import com.example.tictactoe.controller.JogoController
+import com.example.tictactoe.R
 import com.example.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -31,9 +33,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, JogoActivity::class.java)
             val id = jogoController.createJogo()
 
-            val resultIntent = Intent()
-            resultIntent.putExtra(EXTRA_JOGO, id)
-            setResult(RESULT_OK, resultIntent)
+            intent.putExtra(EXTRA_JOGO, id)
+            setResult(RESULT_OK, intent)
 
             startActivity(intent)
         }
@@ -52,9 +53,8 @@ class MainActivity : AppCompatActivity() {
                 DialogInterface.OnClickListener { dialog, which ->
                     val intent = Intent(this, JogoActivity::class.java)
 
-                    val resultIntent = Intent()
-                    resultIntent.putExtra(EXTRA_JOGO, input.text.toString())
-                    setResult(RESULT_OK, resultIntent)
+                    intent.putExtra(EXTRA_JOGO, input.text.toString())
+                    setResult(RESULT_OK, intent)
 
                     startActivity(intent)
                 })
