@@ -1,5 +1,6 @@
 package com.example.tictactoe.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
@@ -16,11 +17,10 @@ class JogoActivity : AppCompatActivity(){
     private val jb: JogoBinding by lazy {
         JogoBinding.inflate(layoutInflater)
     }
-    private lateinit var listPosicoes: MutableList<Posicao>
     private lateinit var listImageViews: MutableList<ImageView>
     private lateinit var jogo: Jogo
     private var jogador: Int = -1
-
+    private var winFlag = false
 
     private val jogoController: JogoController by lazy {
         JogoController()
@@ -42,8 +42,8 @@ class JogoActivity : AppCompatActivity(){
                 jogo = it
                 jb.idjogoTv.text = "ID: ${jogo.id}"
             } ?:run {
-                val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-                builder.setTitle("ID não existe!")
+                finish()
+                return
             }
         }
 
@@ -51,23 +51,28 @@ class JogoActivity : AppCompatActivity(){
             jogador = it
             jb.jogadorTv.text = "você é o jogador ${jogador}"
         }
-        listPosicoes = mutableListOf(jogo.a1, jogo.a2, jogo.a3, jogo.b1, jogo.b2, jogo.b3, jogo.c1, jogo.c2, jogo.c3)
+
         listImageViews = mutableListOf(jb.a1, jb.a2, jb.a3, jb.b1, jb.b2, jb.b3, jb.c1, jb.c2, jb.c3)
 
-        for(i in listPosicoes.indices){
+        for(i in listImageViews.indices){
             listImageViews[i].setOnClickListener {
-                if(jogo.jogador == jogador){
-                    if(jogador == 1){
-                        listPosicoes[i] = Posicao.CIRCULO
+                if((jogo.jogador == jogador) or true){
+                    if(jogo.jogador == 1){
+                        jogo.table[i] = Posicao.CRUZ
                         jogo.jogador = 2
-
-                    }else if(jogador == 2){
-                        listPosicoes[i] = Posicao.CRUZ
+                        jogoController.updateJogo(jogo)
+                    }else if(jogo.jogador == 2){
+                        jogo.table[i] = Posicao.CIRCULO
                         jogo.jogador = 1
+                        jogoController.updateJogo(jogo)
                     }
                 }else{
                     val builder: AlertDialog.Builder = AlertDialog.Builder(this)
                     builder.setTitle("Não é sua vez!")
+                    builder.setNegativeButton("Cancel"
+                    ) { dialog, which -> dialog.cancel() }
+
+                    builder.show()
                 }
                 setTable()
             }
@@ -75,17 +80,73 @@ class JogoActivity : AppCompatActivity(){
         setTable()
     }
     private fun setTable(){
-        for(i in listPosicoes.indices){
-            if( listPosicoes[i] == Posicao.CIRCULO){
+        for(i in listImageViews.indices){
+            if( jogo.table[i] == Posicao.CIRCULO){
                 listImageViews[i].setImageResource(R.drawable.circulo)
                 listImageViews[i].setOnClickListener(null)
             }
-            else if( listPosicoes[i] == Posicao.CRUZ){
+            else if( jogo.table[i] == Posicao.CRUZ){
                 listImageViews[i].setImageResource(R.drawable.cross)
                 listImageViews[i].setOnClickListener(null)
             }
         }
+        jb.jogadorAtualTv.text = "vez do jogador ${jogo.jogador}"
+
+        if (!winFlag){
+            validateJogo()
+        }
     }
+    private fun validateJogo(){
+        var winner = Posicao.VAZIO
+        if((jogo.table[0] == jogo.table[1]) and (jogo.table[0] ==jogo.table[2])){
+            winner = jogo.table[0]
+        }else if((jogo.table[3] == jogo.table[4]) and (jogo.table[3] ==jogo.table[5])){
+            winner = jogo.table[3]
+        }else if((jogo.table[6] == jogo.table[7]) and (jogo.table[6] ==jogo.table[8])){
+            winner = jogo.table[6]
+        }else if((jogo.table[0] == jogo.table[3]) and (jogo.table[0] ==jogo.table[6])){
+            winner = jogo.table[0]
+        }else if((jogo.table[1] == jogo.table[4]) and (jogo.table[1] ==jogo.table[7])){
+            winner = jogo.table[1]
+        }else if((jogo.table[2] == jogo.table[5]) and (jogo.table[2] ==jogo.table[8])){
+            winner = jogo.table[2]
+        }else if((jogo.table[0] == jogo.table[4]) and (jogo.table[0] ==jogo.table[8])){
+            winner = jogo.table[0]
+        }else if((jogo.table[2] == jogo.table[4]) and (jogo.table[2] ==jogo.table[6])){
+            winner = jogo.table[2]
+        }
+        if(winner == Posicao.CRUZ){
+            winFlag = true
 
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setTitle("Jogador 1 ganhou!!!!!!!!!!!!!!!!")
+            builder.setNegativeButton("Ok!"
+            ) { dialog, which -> dialog.cancel() }
+            builder.show()
 
+            for(i in listImageViews.indices)
+                listImageViews[i].setOnClickListener(null)
+
+        }else if(winner == Posicao.CIRCULO){
+            winFlag = true
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setTitle("Jogador 2 ganhou!!!!!!!!!!!!!!!!")
+            builder.setNegativeButton("Ok!"
+            ) { dialog, which -> dialog.cancel() }
+            builder.show()
+
+            for(i in listImageViews.indices)
+                listImageViews[i].setOnClickListener(null)
+
+        }else if(jogo.table.filter { it== Posicao.VAZIO}.isEmpty()){
+            winFlag = true
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setTitle("Empate.")
+            builder.setNegativeButton("ok.."
+            ) { dialog, which -> dialog.cancel() }
+            builder.show()
+        }
+    }
 }
