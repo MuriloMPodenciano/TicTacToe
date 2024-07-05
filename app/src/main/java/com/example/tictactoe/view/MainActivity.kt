@@ -49,17 +49,17 @@ class MainActivity : AppCompatActivity() {
                 InputType.TYPE_CLASS_TEXT
             builder.setView(input)
 
-            builder.setPositiveButton("OK",
-                DialogInterface.OnClickListener { dialog, which ->
-                    val intent = Intent(this, JogoActivity::class.java)
+            builder.setPositiveButton("OK"
+            ) { dialog, which ->
+                val intent = Intent(this, JogoActivity::class.java)
 
-                    intent.putExtra(EXTRA_JOGO, input.text.toString())
-                    setResult(RESULT_OK, intent)
+                intent.putExtra(EXTRA_JOGO, input.text.toString())
+                setResult(RESULT_OK, intent)
 
-                    startActivity(intent)
-                })
-            builder.setNegativeButton("Cancel",
-                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+                startActivity(intent)
+            }
+            builder.setNegativeButton("Cancel"
+            ) { dialog, which -> dialog.cancel() }
 
             builder.show()
         }
