@@ -1,6 +1,5 @@
 package com.example.tictactoe.dao
 
-import android.util.Log
 import com.example.tictactoe.model.Jogo
 import com.google.firebase.Firebase
 import com.google.firebase.database.ChildEventListener
@@ -76,5 +75,9 @@ class JogoDAOFirebase : JogoDAO {
         if (jogos.indexOfFirst { it.id ==id } == -1)
             return null
         return jogos[jogos.indexOfFirst { it.id ==id }]
+    }
+
+    override fun updateJogo(jogo: Jogo) {
+        jogoFirebaseReference.child(jogo.id).setValue(jogo)
     }
 }

@@ -7,4 +7,5 @@ interface JogoDAO {
 
     fun findJogoById(id: String) : Jogo?
 
+    fun updateJogo(jogo: Jogo)
 }

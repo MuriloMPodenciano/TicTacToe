@@ -24,4 +24,8 @@ class JogoController {
     fun findJogoById(id: String): Jogo?{
         return jogoDao.findJogoById(id)
     }
+
+    fun updateJogo(jogo: Jogo){
+        jogoDao.updateJogo(jogo)
+    }
 }
