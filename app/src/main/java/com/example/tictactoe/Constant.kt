@@ -1,4 +1,5 @@
 package com.example.tictactoe
 
-class Constant {
+object Constant {
+    const val EXTRA_JOGO = "EXTRA_JOGO"
 }
