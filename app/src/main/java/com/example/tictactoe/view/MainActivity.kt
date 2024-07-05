@@ -11,6 +11,7 @@ import com.example.tictactoe.model.Constant.EXTRA_JOGO
 import com.example.tictactoe.controller.JogoController
 import com.example.tictactoe.R
 import com.example.tictactoe.databinding.ActivityMainBinding
+import com.example.tictactoe.model.Constant.EXTRA_JOGADOR
 
 class MainActivity : AppCompatActivity() {
     private val amb: ActivityMainBinding by lazy {
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             val id = jogoController.createJogo()
 
             intent.putExtra(EXTRA_JOGO, id)
+            intent.putExtra(EXTRA_JOGADOR, 1)
             setResult(RESULT_OK, intent)
 
             startActivity(intent)
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, JogoActivity::class.java)
 
                 intent.putExtra(EXTRA_JOGO, input.text.toString())
+                intent.putExtra(EXTRA_JOGADOR, 2)
                 setResult(RESULT_OK, intent)
 
                 startActivity(intent)
