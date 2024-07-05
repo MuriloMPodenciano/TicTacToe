@@ -15,7 +15,7 @@ class JogoDAOFirebase : JogoDAO{
         val newJogo = Jogo(
             id = generateId()
         )
-        jogoFirebaseReference.child(newJogo.id.toString()).setValue(newJogo)
+        jogoFirebaseReference.child(newJogo.id).setValue(newJogo)
 
         return newJogo.id
     }
