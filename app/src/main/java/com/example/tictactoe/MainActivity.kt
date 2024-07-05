@@ -11,5 +11,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(amb.root)
+
+        amb.mainTb.apply {
+            title = getString(R.string.app_name)
+            setSupportActionBar(this)
+        }
     }
 }
