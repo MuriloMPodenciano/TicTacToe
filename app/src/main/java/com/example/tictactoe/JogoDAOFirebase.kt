@@ -11,20 +11,13 @@ class JogoDAOFirebase : JogoDAO{
 
     private val jogoFirebaseReference = Firebase.database.getReference(JOGO_ROOT_NODE)
 
-    override fun createJogo(): String {
-        val newJogo = Jogo(
-            id = generateId()
-        )
-        jogoFirebaseReference.child(newJogo.id).setValue(newJogo)
-
-        return newJogo.id
+    override fun createJogo(jogo: Jogo) {
+        jogoFirebaseReference.child(jogo.id).setValue(jogo)
     }
 
-    override fun findJogoById(id: Int) {
-
+    override fun findJogoById(id: String): Jogo {
+        return
     }
 
-    private fun generateId(): String{
-        return Random(System.currentTimeMillis()).nextInt().toString()
-    }
+
 }

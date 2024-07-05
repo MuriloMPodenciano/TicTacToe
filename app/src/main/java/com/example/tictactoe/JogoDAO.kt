@@ -1,7 +1,8 @@
 package com.example.tictactoe
 
 interface JogoDAO {
-    fun createJogo() : String
+    fun createJogo(jogo: Jogo)
 
-    fun findJogoById(id: Int)
+    fun findJogoById(id: String) : Jogo
+
 }

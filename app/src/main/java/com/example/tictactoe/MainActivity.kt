@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val jogoDao: JogoDAO by lazy {
-        JogoDAOFirebase()
+    private val jogoController: JogoController by lazy {
+        JogoController()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         amb.criarBt.setOnClickListener {
             val intent = Intent(this, JogoActivity::class.java)
-            val id = jogoDao.createJogo()
+            val id = jogoController.createJogo()
 
             val resultIntent = Intent()
             resultIntent.putExtra(EXTRA_JOGO, id)
