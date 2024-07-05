@@ -1,6 +1,5 @@
 package com.example.tictactoe.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -74,7 +73,7 @@ class JogoActivity : AppCompatActivity(){
             }
         }
 
-        receivedJogador?.let {
+        receivedJogador.let {
             jogador = it
             jb.jogadorTv.text = "você é o jogador ${jogador}"
         }
