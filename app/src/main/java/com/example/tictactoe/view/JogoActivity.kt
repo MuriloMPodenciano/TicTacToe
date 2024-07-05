@@ -40,9 +40,10 @@ class JogoActivity : AppCompatActivity(){
 
             if (msg.what == GET_JOGO) {
                 jogoController.findJogoById(jogo.id)?.let {
+
                     jogo = it
                 }
-
+                setTable()
                 sendMessageDelayed(
                     obtainMessage().apply { what = GET_JOGO },
                     GET_JOGO_INTERVAL
