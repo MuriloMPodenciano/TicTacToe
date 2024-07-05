@@ -1,5 +1,8 @@
-package com.example.tictactoe
+package com.example.tictactoe.controller
 
+import com.example.tictactoe.Jogo
+import com.example.tictactoe.dao.JogoDAO
+import com.example.tictactoe.dao.JogoDAOFirebase
 import kotlin.random.Random
 
 class JogoController {
@@ -18,7 +21,7 @@ class JogoController {
         jogoDao.createJogo(newJogo)
         return newJogo.id
     }
-    fun findJogoById(id: String): Jogo{
+    fun findJogoById(id: String): Jogo?{
         return jogoDao.findJogoById(id)
     }
 }
