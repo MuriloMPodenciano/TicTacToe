@@ -1,7 +1,10 @@
 package com.example.tictactoe
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tictactoe.Constant.EXTRA_JOGO
@@ -36,16 +39,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         amb.entrarBt.setOnClickListener {
-            val intent = Intent(this, JogoActivity::class.java)
-
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setTitle("Insira um ID existente")
 
-            val resultIntent = Intent()
-            resultIntent.putExtra(EXTRA_JOGO, id)
-            setResult(RESULT_OK, resultIntent)
+            val input = EditText(this)
 
-            startActivity(intent)
+            input.inputType =
+                InputType.TYPE_CLASS_TEXT
+            builder.setView(input)
+
+            builder.setPositiveButton("OK",
+                DialogInterface.OnClickListener { dialog, which ->
+                    val intent = Intent(this, JogoActivity::class.java)
+
+                    val resultIntent = Intent()
+                    resultIntent.putExtra(EXTRA_JOGO, input.text.toString())
+                    setResult(RESULT_OK, resultIntent)
+
+                    startActivity(intent)
+                })
+            builder.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+
+            builder.show()
         }
     }
 }
