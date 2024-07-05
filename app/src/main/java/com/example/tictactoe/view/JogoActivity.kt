@@ -2,6 +2,9 @@ package com.example.tictactoe.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +20,12 @@ class JogoActivity : AppCompatActivity(){
     private val jb: JogoBinding by lazy {
         JogoBinding.inflate(layoutInflater)
     }
+
+    companion object {
+        const val GET_JOGO = 1
+        const val GET_JOGO_INTERVAL = 2000L
+    }
+
     private lateinit var listImageViews: MutableList<ImageView>
     private lateinit var jogo: Jogo
     private var jogador: Int = -1
@@ -24,6 +33,23 @@ class JogoActivity : AppCompatActivity(){
 
     private val jogoController: JogoController by lazy {
         JogoController()
+    }
+
+    val updateJogoHandler = object: Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+
+            if (msg.what == GET_JOGO) {
+                jogoController.findJogoById(jogo.id)?.let {
+                    jogo = it
+                }
+
+                sendMessageDelayed(
+                    obtainMessage().apply { what = GET_JOGO },
+                    GET_JOGO_INTERVAL
+                )
+            }
+        }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +67,7 @@ class JogoActivity : AppCompatActivity(){
             jogoController.findJogoById(receivedId)?.let{
                 jogo = it
                 jb.idjogoTv.text = "ID: ${jogo.id}"
+
             } ?:run {
                 finish()
                 return
@@ -56,7 +83,7 @@ class JogoActivity : AppCompatActivity(){
 
         for(i in listImageViews.indices){
             listImageViews[i].setOnClickListener {
-                if((jogo.jogador == jogador) or true){
+                if(jogo.jogador == jogador){
                     if(jogo.jogador == 1){
                         jogo.table[i] = Posicao.CRUZ
                         jogo.jogador = 2
@@ -76,6 +103,12 @@ class JogoActivity : AppCompatActivity(){
                 }
                 setTable()
             }
+        }
+
+        updateJogoHandler.apply {
+            sendMessage(
+                obtainMessage().apply { what = GET_JOGO }
+            )
         }
         setTable()
     }
