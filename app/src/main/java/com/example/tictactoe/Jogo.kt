@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Jogo(
-    var id: Int = -1,
+    var id: String = "",
     var a1: Posicao = Posicao.VAZIO,
     var a2: Posicao = Posicao.VAZIO,
     var a3: Posicao = Posicao.VAZIO,
