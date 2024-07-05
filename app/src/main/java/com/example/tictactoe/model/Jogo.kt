@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

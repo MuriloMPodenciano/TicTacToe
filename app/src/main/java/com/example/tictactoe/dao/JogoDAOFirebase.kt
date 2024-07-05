@@ -1,6 +1,6 @@
 package com.example.tictactoe.dao
 
-import com.example.tictactoe.Jogo
+import com.example.tictactoe.model.Jogo
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
 

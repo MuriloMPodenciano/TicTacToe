@@ -1,6 +1,6 @@
 package com.example.tictactoe.dao
 
-import com.example.tictactoe.Jogo
+import com.example.tictactoe.model.Jogo
 
 interface JogoDAO {
     fun createJogo(jogo: Jogo)

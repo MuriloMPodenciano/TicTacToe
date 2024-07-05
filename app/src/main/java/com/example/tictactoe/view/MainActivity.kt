@@ -1,4 +1,4 @@
-package com.example.tictactoe.activities
+package com.example.tictactoe.view
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.text.InputType
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tictactoe.Constant.EXTRA_JOGO
+import com.example.tictactoe.model.Constant.EXTRA_JOGO
 import com.example.tictactoe.controller.JogoController
 import com.example.tictactoe.R
 import com.example.tictactoe.databinding.ActivityMainBinding
