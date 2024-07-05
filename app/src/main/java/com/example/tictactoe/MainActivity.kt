@@ -1,5 +1,6 @@
 package com.example.tictactoe
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tictactoe.databinding.ActivityMainBinding
@@ -15,6 +16,16 @@ class MainActivity : AppCompatActivity() {
         amb.mainTb.apply {
             title = getString(R.string.app_name)
             setSupportActionBar(this)
+        }
+
+        amb.criarBt.setOnClickListener {
+            val intent = Intent(this, JogoActivity::class.java)
+            startActivity(intent)
+        }
+
+        amb.entrarBt.setOnClickListener {
+            val intent = Intent(this, JogoActivity::class.java)
+            startActivity(intent)
         }
     }
 }
