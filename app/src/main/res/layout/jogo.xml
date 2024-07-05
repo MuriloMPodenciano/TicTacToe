@@ -29,16 +29,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/idjogoTv"
-        android:text="JOGADOR 1/2"
+        android:text="você é o jogador 1"
         android:textAlignment="center"
-        android:textSize="50sp"/>
+        android:textSize="45sp"/>
+
+    <TextView android:id="@+id/jogadorAtualTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/jogadorTv"
+        android:text="JOGADOR ATUAL:"
+        android:textAlignment="center"
+        android:textSize="45sp"/>
 
     <LinearLayout android:id="@+id/tableLl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/jogadorTv"
+        app:layout_constraintTop_toBottomOf="@id/jogadorAtualTv"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout android:id="@+id/row1"
@@ -53,7 +61,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
 
             <ImageView android:id="@+id/a2"
@@ -62,7 +70,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                android:src="@drawable/paper1" />
+                android:src="@drawable/vazio" />
 
             <ImageView android:id="@+id/a3"
                 android:layout_width="0dp"
@@ -70,7 +78,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
         </LinearLayout>
 
@@ -86,7 +94,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
             <ImageView android:id="@+id/b2"
                 android:layout_width="0dp"
@@ -94,7 +102,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
             <ImageView android:id="@+id/b3"
                 android:layout_width="0dp"
@@ -102,7 +110,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
         </LinearLayout>
 
@@ -118,7 +126,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
             <ImageView android:id="@+id/c2"
                 android:layout_width="0dp"
@@ -126,7 +134,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
             <ImageView android:id="@+id/c3"
                 android:layout_width="0dp"
@@ -134,7 +142,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/paper1"
+                android:src="@drawable/vazio"
                 />
         </LinearLayout>
     </LinearLayout>
